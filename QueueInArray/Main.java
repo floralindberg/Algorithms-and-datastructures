@@ -3,14 +3,11 @@ package QueueInArray;
 public class Main {
 
     public static void main(String[] args) {
-        
+
         QueueInArray newQueueInArray = new QueueInArray(4);
 
         newQueueInArray.enqueue(1);
         newQueueInArray.enqueue(2);
-        newQueueInArray.enqueue(3);
-        newQueueInArray.enqueue(4);
-        newQueueInArray.enqueue(5);
 
         newQueueInArray.dequeue();
         newQueueInArray.dequeue();
@@ -21,15 +18,12 @@ public class Main {
         newQueueInArray.enqueue(6);
         newQueueInArray.enqueue(7);
         newQueueInArray.enqueue(8);
-        
+        newQueueInArray.enqueue(9);
+        newQueueInArray.enqueue(10);
 
-    
-
-        System.out.println(newQueueInArray.head);
-        System.out.println(newQueueInArray.tail);
-
-
+        System.out.println(newQueueInArray.first);
+        System.out.println(newQueueInArray.afterLast);
 
     }
-    
+
 }

@@ -2,9 +2,9 @@ package QueueInArray;
 
 public class QueueInArray {
 
-    Integer head = null;
+    Integer first = null;
 
-    Integer tail = null;
+    Integer afterLast = null;
 
     int size = 4;
 
@@ -23,7 +23,7 @@ public class QueueInArray {
 
         int j = 0;
 
-        for (int i = head; i < array.length; i++) {
+        for (int i = first; i < array.length; i++) {
 
             increasedQueue[j] = array[i];
             j++;
@@ -31,8 +31,8 @@ public class QueueInArray {
         }
 
         array = increasedQueue;
-        head = 0;
-        tail = j - 1;
+        first = 0;
+        afterLast = j - 1;
         size = array.length;
     }
 
@@ -41,57 +41,64 @@ public class QueueInArray {
 
         int j = 0;
 
-        if (tail == null) {
-            for (int k = 0; k < (size / 2); k++) {
-                decreasedQueue[k] = null;
+        if ((size / 2) < 4) {
+            return;
+        }
+
+        else {
+            if (afterLast == null) {
+                for (int k = 0; k < (size / 2); k++) {
+                    decreasedQueue[k] = null;
+                }
+
+                array = decreasedQueue;
+                first = null;
+                afterLast = null;
+                size = array.length;
+
+            } else {
+                for (int i = first; i < afterLast; i++) {
+
+                    decreasedQueue[j] = array[i];
+
+                    j++;
+                }
+                array = decreasedQueue;
+                first = 0;
+                afterLast = j;
+                size = array.length;
+
             }
-
-            array = decreasedQueue;
-            head = null;
-            tail = null;
-            size = array.length;
-
-        } else {
-            for (int i = head; i < tail; i++) {
-
-                decreasedQueue[j] = array[i];
-
-                j++;
-            }
-            array = decreasedQueue;
-            head = 0;
-            tail = j;
-            size = array.length;
-
         }
 
     }
 
     public Integer dequeue() {
 
-        if (head == null) {
-            System.out.println("No elements in queue");
+        if (first == null) {
+            System.out.println("Queue is empty");
+            decreasedQueue();
             return null;
 
         }
 
-        Integer item = array[head];
+        Integer item = array[first];
 
-        array[head] = null;
+        array[first] = null;
 
-        head++;
+        first++;
 
-        if (head == size - 1) {
-            head = null;
+        if (first == size - 1) {
+            first = null;
         }
 
-        if (array[head] == null) {
-            head = null;
-            tail = null;
+        if (array[first] == null) {
+            first = null;
+            afterLast = null;
 
         }
 
-        if (tail == null || tail < size / 3) {
+        if (afterLast == null || afterLast < size / 3) {
 
             decreasedQueue();
 
@@ -103,23 +110,23 @@ public class QueueInArray {
 
     public void enqueue(int item) {
 
-        if (head == null) {
-            head = 0;
-            tail = 1;
-            array[head] = item;
+        if (first == null) {
+            first = 0;
+            afterLast = 1;
+            array[first] = item;
 
         }
 
-        else if (tail == (size - 1)) {
+        else if (afterLast == (size - 1)) {
             increasedQueue();
-            array[tail] = item;
-            tail++;
+            array[afterLast] = item;
+            afterLast++;
         }
 
         else {
 
-            array[tail] = item;
-            tail++;
+            array[afterLast] = item;
+            afterLast++;
 
         }
 
