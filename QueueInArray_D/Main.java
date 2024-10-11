@@ -1,4 +1,4 @@
-package QueueInArray;
+package QueueInArray_D;
 
 public class Main {
 
