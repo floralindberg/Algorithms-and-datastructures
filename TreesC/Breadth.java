@@ -6,8 +6,8 @@ public class Breadth {
 
     public static class Node {
 
-        private Integer value;
-        private Node left, right;
+        public Integer value;
+        public Node left, right;
 
         public Node(Integer value) {
             this.value = value;
@@ -18,6 +18,7 @@ public class Breadth {
             ImprovedQueue queue = new ImprovedQueue();
 
             Node cur = root;
+
             if (cur == null) {
                 return;
             }
@@ -32,7 +33,7 @@ public class Breadth {
                 queue.improvedEnqueue(cur.right);
 
                 cur = queue.improvedDequeue();
-                
+
             }
         }
 
@@ -53,28 +54,32 @@ public class Breadth {
 
         if (currentNode == null) {
             root = new Node(value);
-        }
-
-        else if (value == currentNode.value) {
             return;
         }
 
-        else if (currentNode.left == null) {
-            currentNode.left = new Node(value);
+        if (value == currentNode.value) {
             return;
         }
 
-        else if (currentNode.right == null) {
-            currentNode.right = new Node(value);
-            return;
+        ImprovedQueue queue = new ImprovedQueue();
+        queue.improvedEnqueue(currentNode);
 
-        }
+        while (true) {
+            currentNode = queue.improvedDequeue();
 
-        else {
-            if (currentNode.left != null && (currentNode.left.left == null || currentNode.left.right == null)) {
-                add(value, currentNode.left);
+            if (currentNode.left == null) {
+                currentNode.left = new Node(value);
+                return;
             } else {
-                add(value, currentNode.right);
+                // Om vänstra noden inte är tom, lägg till den i kön
+                queue.improvedEnqueue(currentNode.left);
+            }
+
+            if (currentNode.right == null) {
+                currentNode.right = new Node(value);
+                return;
+            } else {
+                queue.improvedEnqueue(currentNode.right);
             }
         }
     }

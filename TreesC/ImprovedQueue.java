@@ -38,7 +38,6 @@ public class ImprovedQueue {
             tail.queueNode = newNode;
             tail = newNode;
         }
-
         // Går igenom hela för att se var den sista noden är så att denna kan peka på
         // den nya sista
 
@@ -59,5 +58,4 @@ public class ImprovedQueue {
     }
     // Returnerar det första elementet dvs head och gör nästa node till head.
 
-    
 }

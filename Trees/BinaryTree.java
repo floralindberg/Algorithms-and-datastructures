@@ -27,7 +27,7 @@ public class BinaryTree {
                 public void print() {
                         Stack<Node> stk = new Stack<Node>();
                         Node cur = root;
-                        
+
                         while (cur.left != null) {
                                 stk.push(cur);
                                 cur = cur.left;
@@ -46,14 +46,13 @@ public class BinaryTree {
                                         stk.pop();
                                         cur = cur.right;
                                         stk.push(cur);
-                                } 
-                                else if (cur.right != null) {
+                                } else if (cur.right != null) {
                                         cur = cur.right;
                                         stk.push(cur);
                                 }
                                 // move to the leftmost node, push nodes as you go
-                                
-                                 else {
+
+                                else {
                                         stk.pop();
                                         if (stk.isEmpty()) {
                                                 return;
@@ -114,23 +113,21 @@ public class BinaryTree {
 
         }
 
-        public boolean lookUp(Integer key) { // return true or false depending on if the value is found
+        public boolean lookUp(Integer key, Node currentNode) { // return true or false depending on if the value is
+                if (currentNode == null) {
+                        return false;
+                }
 
-                Node current = root;
+                if (currentNode.value.equals(key)) {
+                        return true;
+                }
 
-                while (current != null) {
+                if (key < currentNode.value) {
+                        lookUp(key, currentNode.left);
 
-                        if (current.value.equals(key)) {
-                                return true;
-                        }
+                } else if (key > currentNode.value) {
 
-                        if (key < current.value) {
-                                current = current.left;
-
-                        } else if (key > current.value) {
-
-                                current = current.right;
-                        }
+                        lookUp(key, currentNode.right);
                 }
 
                 return false;

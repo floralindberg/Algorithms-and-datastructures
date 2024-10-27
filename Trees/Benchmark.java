@@ -76,7 +76,7 @@ public class Benchmark {
             for (int i = 0; i < nrOfTests; i++) {
 
                 BinaryTree tree = new BinaryTree();
-               // tree.add((size * 10 / 2), tree.root);
+                tree.add((size * 10 / 2), tree.root);
 
                 for (int j = 0; j < size; j++) {
                     tree.add(random.nextInt(size * 10), tree.root);
@@ -100,7 +100,7 @@ public class Benchmark {
 
                 for (Integer key : arrayWithKeys) {
 
-                    tree.lookUp(key);
+                    tree.lookUp(key, tree.root);
                 }
 
                 long t1 = System.nanoTime();
@@ -116,7 +116,7 @@ public class Benchmark {
             System.out.println("Size: " + size);
             System.out.println("Avrg time - add: " + timeAdd / (nrOfTests * 100));
             System.out.println("Min time - add: " + minTimeAdd / 100);
-            System.out.println("Avrg time - lookUp: " + timeLook / (nrOfTests*size));
+            System.out.println("Avrg time - lookUp: " + timeLook / (nrOfTests * size));
             System.out.println("Min time - lookUp: " + minTime / size);
             System.out.println();
 
